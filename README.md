@@ -15,7 +15,7 @@ Discordのテキストチャンネルで、投稿メッセージに管理用の�
 
     ```
     DISCORD_TOKEN=xxxxxx
-    DATABASE_URL=postgresql://ユーザー:パスワード@ホスト:5432/データベース名
+    DATABASE_URL=xxxxxx
     ```
 
 2. 必要なライブラリをインストール
