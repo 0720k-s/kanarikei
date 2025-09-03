@@ -1,36 +1,49 @@
-# discordpy-startup
+# Discord プロフィール転送＆キックBot
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+Discordのテキストチャンネルで、投稿メッセージに管理用の「転送」「キック」ボタンを付けるだけの超シンプルBotです。
 
-- Herokuでdiscord.pyを始めるテンプレートです。
-- Use Template からご利用ください。
-- 使い方はこちら： [Discord Bot 最速チュートリアル【Python&Heroku&GitHub】 - Qiita](https://qiita.com/1ntegrale9/items/aa4b373e8895273875a8)
+## 特徴
 
-## 各種ファイル情報
+- 「転送」ボタンで別チャンネルにプロフィール転送
+- 「キック」ボタンでユーザーをサーバーからキック
+- 管理者IDだけがボタンを押せる
+- PostgreSQLでユーザーの初投稿時刻だけ記録（おまけ機能）
 
-### discordbot.py
-PythonによるDiscordBotのアプリケーションファイルです。
+## 使い方
 
-### requirements.txt
-使用しているPythonのライブラリ情報の設定ファイルです。
+1. `.env` ファイルを用意（例）
 
-### Procfile
-Herokuでのプロセス実行コマンドの設定ファイルです。
+    ```
+    DISCORD_TOKEN=xxxxxx
+    DATABASE_URL=postgresql://ユーザー:パスワード@ホスト:5432/データベース名
+    ```
 
-### runtime.txt
-Herokuでの実行環境の設定ファイルです。
+2. 必要なライブラリをインストール
 
-### app.json
-Herokuデプロイボタンの設定ファイルです。
+    ```
+    pip install discord.py psycopg2-binary python-dotenv
+    ```
 
-### .github/workflows/flake8.yaml
-GitHub Actions による自動構文チェックの設定ファイルです。
+3. コード内のIDを自分のサーバーに合わせて書き換え
 
-### .gitignore
-Git管理が不要なファイル/ディレクトリの設定ファイルです。
+4. `python ファイル名.py` で起動
 
-### LICENSE
-このリポジトリのコードの権利情報です。MITライセンスの範囲でご自由にご利用ください。
+## 動作概要
 
-### README.md
-このドキュメントです。
+- 指定チャンネルでメッセージが投稿されると、そのメッセージに「転送」「キック」ボタンが付きます
+- ボタンはALLOWED_USER_IDS（管理者ID）だけが利用可能
+- 「転送」でメッセージ内容が別チャンネルにEmbedで送信されます
+- 「キック」でそのユーザーをサーバーから除外します
+
+---
+
+**備考:**  
+「初投稿時刻のDB記録」以外は特にDBを活用していません。  
+機能も最小限・エラーチェックも超手抜きです。
+
+---
+
+## 必要な環境変数（`.env` 例）
+
+DISCORD_TOKEN=xxxx
+DATABASE_URL=xxx
